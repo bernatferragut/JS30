@@ -1,0 +1,29 @@
+/* CSS VARS*/
+:root {
+    --size: 40px;
+    --spacing: 2px;
+    --color: orangered;
+}
+
+/* GENERAL */
+body {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    flex: vertical;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+/* FONTS */
+h1 {
+    align-content: center;
+    margin: 10px 100px;
+    font-size: var(--size);
+    letter-spacing: var(--spacing);
+    color: var(--color);
+}
+
+input {
+    margin:10px 20px;
+}
