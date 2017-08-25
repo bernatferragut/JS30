@@ -4,14 +4,10 @@ const player = document.querySelector('.player');
 const video = player.querySelector('.viewer');
 const progress = player.querySelector('.progress');
 const progFilled = progress.querySelector('.progress__filled');
-const toggle = player.querySelector('.toggle');
-const ranges = player.querySelectorAll('.player__slider');
-const skip = player.querySelectorAll('[data-skip]');
 
 // 2. Build our functions
 
 function togglePlay() {
-    //console.log('toggled');
     if(video.paused) {
         video.play();
     } else {
@@ -19,15 +15,20 @@ function togglePlay() {
     }
 }
 
-function updateButton() {
-    const icon = this.paused ? '▶': '▮▮';
-    toggle.textContent = icon;
+function handleProgress() {
+    const percent = (video.currentTime / video.duration) * 100;
+    progFilled.style.flexBasis = `${percent}%`;
 }
 
+function scrub(e) {
+    const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+    video.currentTime = scrubTime;
+}
 
 // 3. Hook up to the event listeners
 
 video.addEventListener('click', togglePlay);
-video.addEventListener('play', updateButton);
-video.addEventListener('pause', updateButton);
-toggle.addEventListener('click', togglePlay);
+video.addEventListener('timeupdate', handleProgress);
+// progress could work too
+let mousedown = false;
+progress.addEventListener('click', scrub);
